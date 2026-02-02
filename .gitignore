@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+out*/
+*.csv
+*.log
+*.png
+*.pdf
+*.v
+*.aig
+*.blif
+*.json
+experiments-dac19-flow/.git.bak
