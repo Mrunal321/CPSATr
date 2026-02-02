@@ -1,4 +1,4 @@
-# CP-SAT Cut Selection Demo
+# CP-SAT Cut Selection
 
 Minimal, runnable pipeline for the paper experiments.
 
