@@ -45,6 +45,7 @@ Run DAC'19 flow on that AIG:
 ```bash
 python experiments-dac19-flow/run.py --input out/full_adder_rebuilt.aig --out-dir out/dac19_results
 ```
+(Or just execute the run.py after copy+pasting the chosen .aig inside the benchmarks folder, it will automatically pick it up.)
 
 Process a whole directory of BLIFs in one shot:
 ```bash
