@@ -53,7 +53,7 @@ python experiments-dac19-flow/run.py --input out/full_adder_rebuilt.aig --out-di
   - `area`      = minimize area
   - `depth`     = minimize depth (requires depth modeling)
   - `overall`   = alpha_depth*depth + beta_area*area + gamma_inv*inv
-- Objective weights (for `og` and `overall` modes) live in `main_cpsat.py` near the bottom of `solve_circuit`:
+- Objective weights (for `og` and `overall` modes) live in `main_cpsat.py` near the bottom of `solve_circuit` (Can start experimentinmg by changing the weights):
   ```python
   lambda_inv = 10
   lambda_area = 1
