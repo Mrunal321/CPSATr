@@ -11,3 +11,5 @@ out*/
 *.blif
 *.json
 experiments-dac19-flow/.git.bak
+tools/cut_enumeration
+tools/rebuild_from_cpsat

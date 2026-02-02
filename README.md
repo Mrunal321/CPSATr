@@ -18,12 +18,12 @@ source .venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
 
-# run CP-SAT end-to-end (replace tool paths if you rebuild elsewhere)
+# run CP-SAT end-to-end (place binaries in tools/ or point via flags)
 python run_full_flow.py full_adder/full_adder.blif \
   --output-dir out \
   --objective overall \
-  --cut-enum-bin tools/cut_enumeration \
-  --rebuild-bin tools/rebuild_from_cpsat \
+  --cut-enum-bin tools/cut_enumeration \    # or /path/to/cut_enumeration
+  --rebuild-bin tools/rebuild_from_cpsat \  # or /path/to/rebuild_from_cpsat
   --stats-csv out/full_adder_stats.csv \
   --summary-csv out/summary_stats.csv
 
