@@ -11,7 +11,7 @@ Minimal, runnable pipeline for the paper experiments.
 - `experiments-dac19-flow/run.py` – downstream DAC'19 evaluation flow
 - `full_adder/` sample BLIF + cuts (add if not present)
 
-## Quickstart (sample)
+## Quickstart
 ```bash
 python -m venv .venv
 source .venv/bin/activate
