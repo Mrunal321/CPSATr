@@ -17,32 +17,49 @@ python -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
+```
 
-# run CP-SAT end-to-end (place binaries in tools/ or point via flags)
+Build the two helper binaries from your Mockturtle checkout (paths may vary):
+```bash
+cmake --build build --target cut_enumeration rebuild_from_cpsat
+cp build/examples/cut_enumeration build/examples/rebuild_from_cpsat tools/
+```
+
+Run CP-SAT end-to-end on the sample:
+```bash
 python run_full_flow.py full_adder/full_adder.blif \
   --output-dir out \
   --objective overall \
-  --cut-enum-bin tools/cut_enumeration \    # or /path/to/cut_enumeration
-  --rebuild-bin tools/rebuild_from_cpsat \  # or /path/to/rebuild_from_cpsat
+  --cut-enum-bin tools/cut_enumeration \
+  --rebuild-bin tools/rebuild_from_cpsat \
   --stats-csv out/full_adder_stats.csv \
   --summary-csv out/summary_stats.csv
+```
 
-# convert rebuilt BLIF to AIG (optional for DAC flow)
+Convert rebuilt BLIF to AIG (needed for DAC flow):
+```bash
 python tools/blif_to_aig.py out/full_adder_rebuilt.blif out/full_adder_rebuilt.aig
+```
 
-# run DAC'19 flow on the AIG (produces metrics/reports)
+Run DAC'19 flow on that AIG:
+```bash
 python experiments-dac19-flow/run.py --input out/full_adder_rebuilt.aig --out-dir out/dac19_results
+```
 
-# to process a whole directory of BLIFs in one shot:
-# python run_full_flow.py path/to/blif_dir --output-dir out_runs --cut-enum-bin tools/cut_enumeration --rebuild-bin tools/rebuild_from_cpsat
-# each BLIF gets its own cuts / chosen_cuts / rebuilt files and stats rows in out_runs/
+Process a whole directory of BLIFs in one shot:
+```bash
+python run_full_flow.py path/to/blif_dir --output-dir out_runs \
+  --cut-enum-bin tools/cut_enumeration --rebuild-bin tools/rebuild_from_cpsat
+# each BLIF gets cuts / chosen_cuts / rebuilt files + stats in out_runs/
+```
 
-# if you want DAC'19 flow on those rebuilt AIGs:
-# for f in out_runs/*_rebuilt.blif; do
-#   base=${f%.blif}
-#   python tools/blif_to_aig.py "$f" "${base}.aig"
-#   python experiments-dac19-flow/run.py --input "${base}.aig" --out-dir out_runs/dac19_results
-# done
+Run DAC'19 flow on all rebuilt AIGs from that batch:
+```bash
+for f in out_runs/*_rebuilt.blif; do
+  base=${f%.blif}
+  python tools/blif_to_aig.py "$f" "${base}.aig"
+  python experiments-dac19-flow/run.py --input "${base}.aig" --out-dir out_runs/dac19_results
+done
 ```
 
 ### Tuning knobs
